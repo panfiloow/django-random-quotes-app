@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Популярные цитаты</title>
+</head>
+<body>
+    <h1>10 самых популярных цитат</h1>
+    
+    {% for quote in quotes %}
+        <blockquote>
+            "{{ quote.text }}"
+            <footer>- {{ quote.source }} (👍 {{ quote.likes }})</footer>
+        </blockquote>
+    {% empty %}
+        <p>Цитаты пока не добавлены</p>
+    {% endfor %}
+    
+    <br>
+    <a href="{% url 'random_quote' %}">Назад к случайной цитате</a>
+</body>
+</html>

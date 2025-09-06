@@ -1,0 +1,8 @@
+echo "# Django" > .gitignore
+echo "*.sqlite3" >> .gitignore
+echo "*.pyc" >> .gitignore
+echo "__pycache__/" >> .gitignore
+echo "venv/" >> .gitignore
+echo ".env" >> .gitignore
+echo ".vscode/" >> .gitignore
+echo "*.log" >> .gitignore

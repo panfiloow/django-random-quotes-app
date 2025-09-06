@@ -1,0 +1,108 @@
+<!-- quotes/add_quote.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавить цитату</title>
+    <style>
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select, textarea { 
+            width: 100%; 
+            padding: 10px; 
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .error { 
+            color: #d32f2f; 
+            font-size: 14px; 
+            margin-top: 5px;
+        }
+        .errorlist { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0;
+        }
+        .error-box {
+            background-color: #ffebee;
+            border: 1px solid #d32f2f;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #d32f2f;
+        }
+        button { 
+            padding: 12px 24px; 
+            background-color: #4CAF50; 
+            color: white; 
+            border: none; 
+            border-radius: 4px;
+            cursor: pointer; 
+            font-size: 16px;
+        }
+        button:hover { background-color: #45a049; }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Добавить новую цитату</h1>
+        
+        {% if form.non_field_errors %}
+            <div class="error-box">
+                <strong>Ошибка:</strong>
+                <ul class="errorlist">
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label>Текст цитаты:</label>
+                {{ form.text }}
+                {% if form.text.errors %}
+                    <div class="error">{{ form.text.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label>Название источника (фильм, книга и т.д.):</label>
+                {{ form.source_name }}
+                {% if form.source_name.errors %}
+                    <div class="error">{{ form.source_name.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label>Тип источника:</label>
+                {{ form.source_type }}
+                {% if form.source_type.errors %}
+                    <div class="error">{{ form.source_type.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label>Вес цитаты (чем больше, тем чаще показывается):</label>
+                {{ form.weight }}
+                {% if form.weight.errors %}
+                    <div class="error">{{ form.weight.errors }}</div>
+                {% endif %}
+            </div>
+
+            <button type="submit">Добавить цитату</button>
+        </form>
+        
+        <br>
+        <a href="{% url 'random_quote' %}">← Назад к случайной цитате</a>
+    </div>
+</body>
+</html>
