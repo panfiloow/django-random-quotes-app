@@ -25,8 +25,21 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-for-deve
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
+allowed_hosts_str = os.environ.get('ALLOWED_HOSTS', '')
+if allowed_hosts_str:
+    ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',')]
+else:
+    ALLOWED_HOSTS = []
+
+if DEBUG:
+    ALLOWED_HOSTS.extend(['localhost', '127.0.0.1', '0.0.0.0'])
+    ALLOWED_HOSTS = list(set(ALLOWED_HOSTS))
+
+if not SECRET_KEY and DEBUG:
+    SECRET_KEY = 'django-insecure-dev-key-only-for-development'
+elif not SECRET_KEY:
+    raise ValueError("SECRET_KEY must be set in production environment")
 
 # Application definition
 
