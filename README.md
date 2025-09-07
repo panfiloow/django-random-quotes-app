@@ -1,6 +1,7 @@
 A web application that displays random quotes from movies and books with interactive features like liking and disliking quotes.
 
 Features
+
 🎲 Random Quote Generator: Get a random weighted quote on each page load
 
 ❤️ Like/Dislike System: Users can rate quotes (stored in session)
@@ -16,6 +17,7 @@ Features
 🔄 Next Quote Button: AJAX-powered button to get new quotes without page reload
 
 Technologies Used
+
 Backend: Django 5.2.6
 
 Database: SQLite3
@@ -26,6 +28,7 @@ Authentication: Session-based (no login required)
 
 
 Installation & Setup
+
 Prerequisites
 Python 3.8+
 
@@ -74,6 +77,7 @@ python manage.py runserver
 Visit http://127.0.0.1:8000/ in your browser.
 
 Project Structure
+
 django-random-quotes-app/
 ├── quote_project/          # Project settings
 │   ├── settings.py         # Configuration
@@ -95,6 +99,7 @@ django-random-quotes-app/
 └── manage.py             # Django management script
 
 Environment Configuration
+
 For production deployment, make sure to:
 
 1.Set a proper SECRET_KEY:
@@ -108,6 +113,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-key-for-development-only')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 Usage
+
 View Random Quote: Visit the homepage to see a random quote
 
 Like/Dislike: Click thumbs up/down to rate quotes (once per quote)
@@ -117,6 +123,7 @@ Add Quote: Use "Add Quote" link to submit new quotes
 View Popular: See top liked quotes on the popular page
 
 API Endpoints
+
 GET / - Random quote page
 
 GET /next/ - Get next random quote (AJAX)
@@ -130,6 +137,7 @@ GET /add/ - Add quote form
 GET /popular/ - Popular quotes page
 
 Contributing
+
 Fork the repository
 
 Create a feature branch: git checkout -b feature-name
@@ -141,9 +149,11 @@ Push to branch: git push origin feature-name
 Submit a pull request
 
 License
+
 This project is open source and available under the MIT License.
 
 Deployment
+
 For production deployment, consider:
 
 Using PostgreSQL instead of SQLite
