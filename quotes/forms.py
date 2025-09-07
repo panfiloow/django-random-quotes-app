@@ -22,6 +22,13 @@ class QuoteForm(forms.Form):
         widget=forms.NumberInput(attrs={'min': 1})
     )
 
+    def clean_text(self):
+        """Проверяет, что цитата с таким текстом еще не существует"""
+        text = self.cleaned_data.get('text')
+        if text and Quote.objects.filter(text=text).exists():
+            raise ValidationError('Такая цитата уже существует в базе данных.')
+        return text
+
     def clean(self):
         cleaned_data = super().clean()
         source_name = cleaned_data.get('source_name')

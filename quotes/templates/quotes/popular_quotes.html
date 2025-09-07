@@ -1,21 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Популярные цитаты</title>
-</head>
-<body>
-    <h1>10 самых популярных цитат</h1>
-    
-    {% for quote in quotes %}
-        <blockquote>
-            "{{ quote.text }}"
-            <footer>- {{ quote.source }} (👍 {{ quote.likes }})</footer>
-        </blockquote>
-    {% empty %}
-        <p>Цитаты пока не добавлены</p>
-    {% endfor %}
-    
-    <br>
-    <a href="{% url 'random_quote' %}">Назад к случайной цитате</a>
-</body>
-</html>
+{% extends 'quotes/base.html' %}
+
+{% block title %}Популярные Цитаты{% endblock %}
+
+{% block content %}
+<h1>🏆 Топ-10 Популярных Цитат</h1>
+
+{% if quotes %}
+    <ul class="quote-list">
+        {% for quote in quotes %}
+            <li class="quote-item">
+                <p class="quote-text">"{{ quote.text }}"</p>
+                <p class="quote-source">— {{ quote.source }}</p>
+                <div class="quote-meta">
+                    <span class="likes-count">👍 {{ quote.likes }}</span>
+                    <span class="dislikes-count">👎 {{ quote.dislikes }}</span>
+                    <span>👁️ {{ quote.views }} просмотров</span>
+                    <span>⚖️ Вес: {{ quote.weight }}</span>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <div class="quote-container">
+        <p class="quote-text">📊 Пока нет цитат с лайками</p>
+        <p class="quote-source">Станьте первым, кто поставит лайк!</p>
+    </div>
+{% endif %}
+
+<div style="margin-top: 30px;">
+    <a href="{% url 'random_quote' %}" class="btn btn-secondary">
+        🎲 К случайной цитате
+    </a>
+</div>
+{% endblock %}

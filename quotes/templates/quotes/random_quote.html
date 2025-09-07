@@ -1,214 +1,45 @@
 <!-- quotes/random_quote.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Случайная цитата</title>
-    <style>
-        .rated { 
-            opacity: 0.6; 
-            cursor: not-allowed;
-        }
-        .not-rated { 
-            cursor: pointer; 
-        }
-        .not-rated:hover { 
-            opacity: 0.8; 
-        }
-        button {
-            padding: 10px 15px;
-            margin: 5px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        #like-btn.rated { background-color: #4CAF50; color: white; }
-        #dislike-btn.rated { background-color: #f44336; color: white; }
-        #like-btn.not-rated { background-color: #e8f5e8; }
-        #dislike-btn.not-rated { background-color: #ffebee; }
-        #next-btn { 
-            background-color: #2196F3; 
-            color: white; 
-            margin-top: 15px;
-            padding: 12px 20px;
-        }
-        #next-btn:hover { background-color: #1976D2; }
-        .quote-container {
-            margin: 20px 0;
-            padding: 20px;
-            border-left: 4px solid #2196F3;
-            background-color: #f9f9f9;
-        }
-    </style>
-</head>
-<body>
-    <h1>Случайная цитата</h1>
-    
-    <div id="quote-container">
-        {% if quote %}
-            <div class="quote-container">
-                <blockquote>
-                    "<span id="quote-text">{{ quote.text }}</span>"
-                    <footer>- <span id="quote-source">{{ quote.source }}</span></footer>
-                </blockquote>
-                
-                <p>Просмотров: <span id="views">{{ quote.views }}</span></p>
-                
-                <button id="like-btn" 
-                        class="{% if user_has_liked %}rated{% else %}not-rated{% endif %}"
-                        onclick="rateQuote('like', {{ quote.id }})"
-                        {% if user_has_liked %}disabled{% endif %}>
-                    👍 <span id="likes">{{ quote.likes }}</span>
-                </button>
-                
-                <button id="dislike-btn" 
-                        class="{% if user_has_disliked %}rated{% else %}not-rated{% endif %}"
-                        onclick="rateQuote('dislike', {{ quote.id }})"
-                        {% if user_has_disliked %}disabled{% endif %}>
-                    👎 <span id="dislikes">{{ quote.dislikes }}</span>
-                </button>
-            </div>
-        {% else %}
-            <p>Цитаты пока не добавлены. <a href="{% url 'add_quote' %}">Добавьте первую цитату!</a></p>
-        {% endif %}
+{% extends 'quotes/base.html' %}
+
+{% block title %}Случайная Цитата{% endblock %}
+
+{% block content %}
+<h1>🎲 Случайная Цитата</h1>
+
+{% if quote %}
+    <div class="quote-container">
+        <p class="quote-text">"{{ quote.text }}"</p>
+        <p class="quote-source">— {{ quote.source }}</p>
     </div>
     
-    {% if quote %}
-        <button id="next-btn" onclick="getNextQuote()">Следующая цитата →</button>
-    {% endif %}
+    <div class="stats">
+        <span>👁️ {{ quote.views }} просмотров</span>
+        <span class="likes-count">👍 {{ quote.likes }}</span>
+        <span class="dislikes-count">👎 {{ quote.dislikes }}</span>
+    </div>
     
-    <br><br>
-    <a href="{% url 'add_quote' %}">Добавить цитату</a> | 
-    <a href="{% url 'popular_quotes' %}">Популярные цитаты</a>
+    <div class="rating-buttons-container">
+        <button id="like-btn" class="rating-btn like-btn" 
+                onclick="rateQuote('like', {{ quote.id }})"
+                {% if user_has_liked %}disabled{% endif %}>
+            👍 Лайк
+        </button>
+        
+        <button id="dislike-btn" class="rating-btn dislike-btn"
+                onclick="rateQuote('dislike', {{ quote.id }})"
+                {% if user_has_disliked %}disabled{% endif %}>
+            👎 Дизлайк
+        </button>
+    </div>
     
-    <script>
-    // Функция для получения CSRF токена
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-
-    function rateQuote(action, quoteId) {
-        fetch(`/${action}/${quoteId}/`, {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': getCookie('csrftoken'),
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                document.getElementById('likes').textContent = data.likes;
-                document.getElementById('dislikes').textContent = data.dislikes;
-                
-                // Обновляем стили кнопок
-                if (action === 'like') {
-                    document.getElementById('like-btn').classList.add('rated');
-                    document.getElementById('like-btn').classList.remove('not-rated');
-                    document.getElementById('like-btn').disabled = true;
-                    
-                    document.getElementById('dislike-btn').classList.remove('rated');
-                    document.getElementById('dislike-btn').classList.add('not-rated');
-                    document.getElementById('dislike-btn').disabled = false;
-                } else {
-                    document.getElementById('dislike-btn').classList.add('rated');
-                    document.getElementById('dislike-btn').classList.remove('not-rated');
-                    document.getElementById('dislike-btn').disabled = true;
-                    
-                    document.getElementById('like-btn').classList.remove('rated');
-                    document.getElementById('like-btn').classList.add('not-rated');
-                    document.getElementById('like-btn').disabled = false;
-                }
-            } else {
-                alert(data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Ошибка при оценке цитаты');
-        });
-    }
-
-    function getNextQuote() {
-        // Показываем индикатор загрузки
-        const nextBtn = document.getElementById('next-btn');
-        const originalText = nextBtn.textContent;
-        nextBtn.textContent = 'Загрузка...';
-        nextBtn.disabled = true;
-
-        fetch('/next/', {
-            method: 'GET',
-            headers: {
-                'X-CSRFToken': getCookie('csrftoken')
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.success) {
-                // Обновляем содержимое страницы
-                document.getElementById('quote-text').textContent = data.quote_text;
-                document.getElementById('quote-source').textContent = data.quote_source;
-                document.getElementById('views').textContent = data.views;
-                document.getElementById('likes').textContent = data.likes;
-                document.getElementById('dislikes').textContent = data.dislikes;
-
-                // Обновляем кнопки лайков
-                const likeBtn = document.getElementById('like-btn');
-                const dislikeBtn = document.getElementById('dislike-btn');
-
-                // Обновляем обработчики событий с новым ID цитаты
-                likeBtn.onclick = function() { rateQuote('like', data.quote_id); };
-                dislikeBtn.onclick = function() { rateQuote('dislike', data.quote_id); };
-
-                // Обновляем стили кнопок
-                if (data.user_has_liked) {
-                    likeBtn.classList.add('rated');
-                    likeBtn.classList.remove('not-rated');
-                    likeBtn.disabled = true;
-                } else {
-                    likeBtn.classList.remove('rated');
-                    likeBtn.classList.add('not-rated');
-                    likeBtn.disabled = false;
-                }
-
-                if (data.user_has_disliked) {
-                    dislikeBtn.classList.add('rated');
-                    dislikeBtn.classList.remove('not-rated');
-                    dislikeBtn.disabled = true;
-                } else {
-                    dislikeBtn.classList.remove('rated');
-                    dislikeBtn.classList.add('not-rated');
-                    dislikeBtn.disabled = false;
-                }
-            } else {
-                alert(data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Ошибка при загрузке цитаты');
-        })
-        .finally(() => {
-            // Восстанавливаем кнопку
-            nextBtn.textContent = originalText;
-            nextBtn.disabled = false;
-        });
-    }
-    </script>
-</body>
-</html>
+{% else %}
+    <div class="quote-container">
+        <p class="quote-text">📝 Цитаты пока не добавлены</p>
+        <p class="quote-source">Будьте первым, кто добавит цитату!</p>
+    </div>
+    
+    <a href="{% url 'add_quote' %}" class="btn btn-primary">
+        ➕ Добавить первую цитату
+    </a>
+{% endif %}
+{% endblock %}
