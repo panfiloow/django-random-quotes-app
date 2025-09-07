@@ -26,6 +26,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-for-deve
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_COOKIE_AGE = 1209600  
+
 allowed_hosts_str = os.environ.get('ALLOWED_HOSTS', '')
 if allowed_hosts_str:
     ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',')]
