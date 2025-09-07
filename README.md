@@ -1,49 +1,38 @@
-# Description
+# Random Quotes Django Application
+
 A web application that displays random quotes from movies and books with interactive features like liking and disliking quotes.
 
-# Features
+## ✨ Features
 
-🎲 Random Quote Generator: Get a random weighted quote on each page load
+- **🎲 Random Quote Generator**: Get a random weighted quote on each page load
+- **❤️ Like/Dislike System**: Users can rate quotes (stored in session)
+- **➕ Add New Quotes**: Form to add new quotes with sources
+- **📊 Popular Quotes**: Top 10 most liked quotes page
+- **⚖️ Weight System**: Quotes with higher weight appear more frequently
+- **🎯 Source Limits**: Maximum 3 quotes per source
+- **🔄 Next Quote Button**: AJAX-powered button to get new quotes without page reload
+  
+## 🛠️ Technologies Used
 
-❤️ Like/Dislike System: Users can rate quotes (stored in session)
-
-➕ Add New Quotes: Form to add new quotes with sources
-
-📊 Popular Quotes: Top 10 most liked quotes page
-
-⚖️ Weight System: Quotes with higher weight appear more frequently
-
-🎯 Source Limits: Maximum 3 quotes per source 
-
-🔄 Next Quote Button: AJAX-powered button to get new quotes without page reload
-
-# Technologies Used
-
-Backend: Django 5.2.6
-
-Database: SQLite3
-
-Frontend: HTML, CSS, JavaScript
-
-Authentication: Session-based (no login required)
+- **Backend**: Django 5.2.6
+- **Database**: SQLite3
+- **Frontend**: HTML, CSS, JavaScript
+- **Authentication**: Session-based (no login required)
 
 
-# Installation & Setup
+## 📦 Installation & Setup
 
 ### Prerequisites
-
-Python 3.8+
-
-pip package manager
+- Python 3.8+
+- pip package manager
 
 ### 1. Clone the Repository
-  ```
-  git clone https://github.com/panfiloow/django-random-quotes-app.git
-
-  cd django-random-quotes-app 
+```bash
+git clone https://github.com/panfiloow/django-random-quotes-app.git
+cd django-random-quotes-app
   ```
 ### 2. Create Virtual Environment
-  ``` 
+  ```
   python -m venv venv
   ```
 ### 3. Activate Virtual Environment
@@ -72,11 +61,11 @@ pip package manager
   ```
 
   Edit .env with your settings:
-
+  ```
   SECRET_KEY=your-super-secret-key-here
 
   DEBUG=True
-
+  ```
 ### 6. Apply Migrations
 
   ```
