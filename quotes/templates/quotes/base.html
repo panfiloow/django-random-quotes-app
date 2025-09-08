@@ -10,7 +10,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -22,7 +22,7 @@
             justify-content: center;
             color: #333;
         }
-        
+
         .container {
             background: white;
             border-radius: 20px;
@@ -33,20 +33,20 @@
             margin: 20px;
             text-align: center;
         }
-        
+
         h1 {
             font-size: 3rem;
             margin-bottom: 30px;
             color: #4a5568;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
-        
+
         h2 {
             font-size: 2.2rem;
             margin-bottom: 25px;
             color: #2d3748;
         }
-        
+
         .btn {
             display: inline-block;
             padding: 20px 40px;
@@ -61,27 +61,27 @@
             text-align: center;
             min-width: 200px;
         }
-        
+
         .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
-        
+
         .btn-secondary {
             background: #e2e8f0;
             color: #4a5568;
         }
-        
+
         .btn-secondary:hover {
             background: #cbd5e0;
             transform: translateY(-2px);
         }
-        
+
         .quote-container {
             background: #f7fafc;
             border-radius: 15px;
@@ -89,7 +89,7 @@
             margin: 25px 0;
             border-left: 6px solid #667eea;
         }
-        
+
         .quote-text {
             font-size: 1.8rem;
             line-height: 1.6;
@@ -97,13 +97,13 @@
             margin-bottom: 20px;
             font-style: italic;
         }
-        
+
         .quote-source {
             font-size: 1.4rem;
             color: #718096;
             font-weight: 500;
         }
-        
+
         .stats {
             display: flex;
             justify-content: center;
@@ -112,7 +112,7 @@
             font-size: 1.2rem;
             color: #718096;
         }
-        
+
         .rating-buttons-container {
             display: flex;
             justify-content: center;
@@ -121,7 +121,7 @@
             min-height: 60px;
             align-items: center;
         }
-        
+
         .rating-btn {
             padding: 15px 25px;
             font-size: 1.2rem;
@@ -137,32 +137,32 @@
             gap: 8px;
             flex-shrink: 0;
         }
-        
+
         .like-btn {
             background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
             color: white;
         }
-        
+
         .dislike-btn {
             background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
             color: white;
         }
-        
+
         .rating-btn:hover:not(:disabled) {
             transform: scale(1.05);
         }
-        
+
         .rating-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
-        
+
         .form-group {
             margin-bottom: 30px;
             text-align: left;
         }
-        
+
         label {
             display: block;
             font-size: 1.4rem;
@@ -170,7 +170,7 @@
             color: #4a5568;
             font-weight: 600;
         }
-        
+
         input, select, textarea {
             width: 100%;
             padding: 20px;
@@ -179,18 +179,18 @@
             border-radius: 12px;
             transition: border-color 0.3s ease;
         }
-        
+
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
-        
+
         textarea {
             min-height: 150px;
             resize: vertical;
         }
-        
+
         .error {
             color: #e53e3e;
             font-size: 1.2rem;
@@ -200,7 +200,7 @@
             border-radius: 8px;
             border-left: 4px solid #e53e3e;
         }
-        
+
         .success {
             color: #38a169;
             font-size: 1.2rem;
@@ -210,12 +210,12 @@
             border-radius: 8px;
             border-left: 4px solid #38a169;
         }
-        
+
         .quote-list {
             list-style: none;
             text-align: left;
         }
-        
+
         .quote-item {
             background: #f7fafc;
             padding: 25px;
@@ -223,7 +223,7 @@
             border-radius: 12px;
             border-left: 4px solid #667eea;
         }
-        
+
         .quote-meta {
             display: flex;
             justify-content: space-between;
@@ -232,17 +232,17 @@
             font-size: 1.1rem;
             color: #718096;
         }
-        
+
         .likes-count {
             color: #38a169;
             font-weight: 600;
         }
-        
+
         .dislikes-count {
             color: #e53e3e;
             font-weight: 600;
         }
-        
+
         .nav {
             display: flex;
             gap: 15px;
@@ -250,69 +250,69 @@
             flex-wrap: wrap;
             justify-content: center;
         }
-        
+
         /* Стили для кнопок с голосованием */
         .rating-btn.rated {
             transform: scale(1.05);
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
             font-weight: bold;
         }
-        
+
         .like-btn.rated {
             background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
             border: 2px solid #2f855a;
         }
-        
+
         .dislike-btn.rated {
             background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
             border: 2px solid #c53030;
         }
-        
+
         .rating-btn:disabled {
             opacity: 0.8;
             cursor: not-allowed;
         }
-        
+
         .rating-btn:not(:disabled):hover {
             transform: scale(1.08);
         }
-        
+
         @media (max-width: 768px) {
             .container {
                 padding: 25px;
                 margin: 10px;
             }
-            
+
             h1 {
                 font-size: 2.2rem;
             }
-            
+
             h2 {
                 font-size: 1.8rem;
             }
-            
+
             .btn {
                 padding: 15px 30px;
                 font-size: 1.2rem;
                 min-width: 160px;
             }
-            
+
             .quote-text {
                 font-size: 1.4rem;
             }
-            
+
             .rating-buttons-container {
                 flex-direction: column;
                 align-items: center;
                 gap: 15px;
             }
-            
+
             .rating-btn {
                 width: 160px;
                 height: 45px;
                 font-size: 1.1rem;
             }
-            
+
             .stats {
                 flex-direction: column;
                 gap: 10px;
@@ -325,7 +325,7 @@
         {% block content %}
         {% endblock %}
     </div>
-    
+
     <div class="nav">
         <a href="{% url 'random_quote' %}" class="btn btn-secondary">🎲 Случайная цитата</a>
         <a href="{% url 'add_quote' %}" class="btn btn-primary">➕ Добавить цитату</a>
@@ -336,17 +336,17 @@
     function rateQuote(action, quoteId) {
         const likeBtn = document.getElementById('like-btn');
         const dislikeBtn = document.getElementById('dislike-btn');
-        
+
         // Сохраняем оригинальный текст
         const likeText = likeBtn.innerHTML;
         const dislikeText = dislikeBtn.innerHTML;
-        
-        // Показываем загрузку (сохраняем размеры)
+
+        // Показываем загрузку
         likeBtn.innerHTML = '⏳';
         dislikeBtn.innerHTML = '⏳';
         likeBtn.disabled = true;
         dislikeBtn.disabled = true;
-        
+
         fetch(`/${action}/${quoteId}/`, {
             method: 'POST',
             headers: {
@@ -354,28 +354,29 @@
                 'Content-Type': 'application/json'
             }
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.success) {
                 // Обновляем счетчики в блоке статистики
                 const likesElement = document.querySelector('.likes-count');
                 const dislikesElement = document.querySelector('.dislikes-count');
-                
-                if (likesElement) {
-                    likesElement.textContent = `👍 ${data.likes}`;
-                }
-                if (dislikesElement) {
-                    dislikesElement.textContent = `👎 ${data.dislikes}`;
-                }
-                
+
+                if (likesElement) likesElement.textContent = `👍 ${data.likes}`;
+                if (dislikesElement) dislikesElement.textContent = `👎 ${data.dislikes}`;
+
                 // Обновляем состояние кнопок
                 likeBtn.disabled = data.user_has_liked;
                 dislikeBtn.disabled = data.user_has_disliked;
-                
-                // Восстанавливаем текст кнопок (фиксированный)
+
+                // Восстанавливаем текст кнопок
                 likeBtn.innerHTML = '👍 Лайк';
                 dislikeBtn.innerHTML = '👎 Дизлайк';
-                
+
                 // Добавляем/убираем классы для визуальной обратной связи
                 if (data.user_has_liked) {
                     likeBtn.classList.add('rated');
@@ -388,7 +389,7 @@
                     dislikeBtn.classList.remove('rated');
                 }
             } else {
-                alert(data.message || 'Ошибка при оценке');
+                alert('Ошибка: ' + (data.message || 'Неизвестная ошибка'));
                 // Восстанавливаем кнопки
                 likeBtn.innerHTML = likeText;
                 dislikeBtn.innerHTML = dislikeText;
@@ -398,14 +399,14 @@
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Ошибка сети');
+            alert('Ошибка сети: ' + error.message);
             likeBtn.innerHTML = likeText;
             dislikeBtn.innerHTML = dislikeText;
             likeBtn.disabled = false;
             dislikeBtn.disabled = false;
         });
     }
-    
+
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
